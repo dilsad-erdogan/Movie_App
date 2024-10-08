@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FavCard from "./FavCard"
+import Card from "../Card/Card";
 
 const Fav = () => {
   const [trends, setTrends] = useState([]);
@@ -29,7 +29,7 @@ const Fav = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 place-items-center mt-8">
             {trends.map((trend) => (
               <div key={trend.id}>
-                <FavCard fav={trend}/>
+                <Card movie={trend}/>
               </div>
             ))}
           </div>

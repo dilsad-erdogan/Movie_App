@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
+import Card from "../Card/Card"; 
 
 const Search = () => {
     const [movie, setMovie] = useState('');
@@ -57,7 +57,7 @@ const Search = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 place-items-center mt-8">
                                 {results.map((result) => (
                                     <div key={result.id}>
-                                        <MovieCard movie={result}/>
+                                        <Card movie={result}/>
                                     </div>
                                 ))}
                             </div>
@@ -65,7 +65,7 @@ const Search = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 place-items-center mt-8">
                                 {trends.map((trend) => (
                                     <div key={trend.id}>
-                                        <MovieCard movie={trend}/>
+                                        <Card movie={trend}/>
                                     </div>
                                 ))}
                             </div>
