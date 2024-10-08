@@ -27,12 +27,6 @@ const Hero = () => {
             .catch(err => console.error(err));
     }, []);
 
-    // Tıklayınca spesifik movie getiriyo 
-    //   fetch('https://api.themoviedb.org/3/movie/<movie_id>?language=en-US', options)
-    //     .then(response => response.json())
-    //     .then(response => console.log(response))
-    //     .catch(err => console.error(err));
-
     const settings = {
         dots: false,
         arrows: false,
