@@ -21,8 +21,8 @@ const LoginPopup = ({ loginPopup, toggleLoginPopup }) => {
     <div>
       {loginPopup && (
         <div ref={loginPopupRef} className="fixed top-0 left-0 w-full h-full z-50 overflow-y-auto">
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-auto bg-gray-600 rounded-2xl">
-              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="rounded-2xl bg-white/10 backdrop-blur-md sm:w-[600px] md:w-[380px] shadow-custom-inset">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-auto rounded-2xl">
+              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="rounded-2xl bg-gray-900 backdrop-blur-md sm:w-[600px] md:w-[380px] shadow-custom-inset">
               {showsignin ? <Register handleSignIn={handleSignIn} /> : <Login handleSignIn={handleSignIn} />}
               </motion.div>
           </div>
