@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 
 const Fav = () => {
-  const [trends, setTrends] = useState([]);
+  const [favs, setFavs] = useState([]);
+
+  const fav = [
+    { id: '889737' },
+    { id: '30984' },
+    { id: '44214' },
+    { id: '10193' },
+    { id: '597' }
+  ];
 
   const options = {
     method: 'GET',
@@ -13,13 +21,22 @@ const Fav = () => {
   };
 
   useEffect(() => {
-    const day = new Date();
-    fetch(`https://api.themoviedb.org/3/trending/all/day?query=${day}&language=en-US`, options)
-        .then(response => response.json())
-        .then(response => {
-            setTrends(response.results || []);
-        })
-    .catch(err => console.error(err));
+    // Tüm favori ID'leri için paralel olarak film detaylarını alıyoruz
+    const fetchMovieDetails = async () => {
+      const promises = fav.map((movie) =>
+        fetch(`https://api.themoviedb.org/3/movie/${movie.id}`, options)
+          .then((response) => response.json())
+      );
+
+      try {
+        const results = await Promise.all(promises);
+        setFavs(results);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+      }
+    };
+
+    fetchMovieDetails();
   }, []);
 
   return (
@@ -27,16 +44,16 @@ const Fav = () => {
       <div className="overflow-hidden min-h-screen">
         <div className="mt-14">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 place-items-center mt-8">
-            {trends.map((trend) => (
-              <div key={trend.id}>
-                <Card movie={trend}/>
+            {favs.map((fav) => (
+              <div key={fav.id}>
+                <Card movie={fav} />
               </div>
             ))}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Fav
+export default Fav;
