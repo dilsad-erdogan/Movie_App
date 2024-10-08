@@ -21,7 +21,6 @@ const Search = () => {
         fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(movie)}&include_adult=false&language=en-US&page=1`, options)
             .then(response => response.json())
             .then(response => {
-                console.log(response.results)
                 setResults(response.results || []);
             })
             .catch(err => console.error(err));
