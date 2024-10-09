@@ -17,7 +17,6 @@ const Hero = () => {
             .then(response => response.json())
             .then(response => {
                 if (Array.isArray(response.results)) {
-                    console.log(response.results);
                     setPopulars(response.results);
                 } else {
                     console.error("Unexpected response format", response);

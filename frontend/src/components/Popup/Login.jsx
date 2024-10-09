@@ -1,10 +1,23 @@
 import { useState } from "react";
+import userServices from "../../services/user";
 
 const Login = ({ handleSignIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const login = async () => {};
+  const login = async () => {
+    localStorage.clear();
+    try{
+      const userData = { email: email, password: password };
+      const response = await userServices.login(userData);
+
+      localStorage.setItem('user', JSON.stringify(response.data));
+      alert('You are logged in!');
+    } catch(error) {
+      console.error(error);
+      alert('There was a mistake!');
+    }
+  };
 
   return (
     <div className="p-6">
@@ -21,7 +34,7 @@ const Login = ({ handleSignIn }) => {
             </div>
         </form>
 
-        <button className="cursor-pointer hover:scale-105 duration-300 mt-5 py-2 px-8 rounded-full relative z-10 w-full" onClick={login}>Login</button>
+        <button className="bg-red-600 text-white cursor-pointer hover:scale-105 duration-300 mt-5 py-2 px-8 rounded-full relative z-10 w-full" onClick={login}>Login</button>
 
         <p className="text-center text-sm my-3 cursor-pointer" onClick={handleSignIn}>Already have not an account? Sign In</p>
     </div>
