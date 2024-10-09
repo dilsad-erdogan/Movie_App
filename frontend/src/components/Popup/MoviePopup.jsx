@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
+import favServices from "../../services/fav";
 
 const MoviePopup = ({ moviePopup, toggleMoviePopup, movieDetail }) => {
     const moviePopupRef = useRef();
@@ -11,8 +12,19 @@ const MoviePopup = ({ moviePopup, toggleMoviePopup, movieDetail }) => {
         }
     });
 
-    const addFav = () => {
-        console.log(movieDetail.id);
+    const addFav = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const favData = { user_id: user._id, movie_id: movieDetail.id };
+            const response = await favServices.add(favData);
+    
+            if (response.success) {
+                alert('Movie added to favorites!');
+            }    
+        } catch (error) {
+            alert('Movie is already in your favorites!');
+            console.error(error);
+        }
     };
 
     return (
