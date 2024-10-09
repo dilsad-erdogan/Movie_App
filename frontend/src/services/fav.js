@@ -21,7 +21,7 @@ const add = async (fav) => {
 
 const deleted = async (id) => {
     try{
-        const response = await axios.post(`${FAV}/delete/${id}`);
+        const response = await axios.patch(`${FAV}/delete/${id}`);
         return response.data;
     } catch(error) {
         console.error('Error login: ', error);
